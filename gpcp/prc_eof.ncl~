@@ -1,0 +1,91 @@
+;prc_eof
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+begin
+
+    f_prc                              =addfile("/mnt/f/data/ERA-interim/monthly/precip.mon.mean.nc","r")
+    f_prc_djf                          =addfile("/mnt/f/data/ERA-interim/monthly/precip.DJF.mean.nc","r")
+    prc                                =short2flt(f_prc->r(36:383,:,:));1982-2010
+    prc_djf                            =short2flt(f_prc_djf->r(9:92,:,:))
+
+    wks                                =gsn_open_wks("x11", "/mnt/f/pdf/prc_eof")
+
+    dims                               =dimsizes(prc)
+
+    ;;计算权重
+    w                                  =sqrt(cos(0.01745329*prc&lat))  ;权重系数
+    wp                                 =prc*conform(prc, w, 1)
+    copy_VarCoords(prc, wp)
+
+    ;;EOF分解
+    x                                  =wp(lat|:,lon|:,time|:)
+    neof                               =2
+    eof                                =eofunc_Wrap(x, neof, False)  ;EOF分解
+
+    ;;north检验
+    ntim                               =dims(0)
+    sig_pcv                            =eofunc_north(eof@pcvar,ntim, False)
+
+    ;;计算时间序列，并标准化
+    eof_ts                             =eofunc_ts_Wrap(x, eof, False)
+    eof_ts                             =dim_standardize_n(eof_ts, 1, 1)
+
+    ;;回归降水
+    xx                                 =regCoef(eof_ts(0,:), prc({lat|:},{lon|:},{time|:}))
+copy_VarCoords(prc, xx)
+    ;;创建新的变量
+    rc_prc                             =prc(0,:,:)
+    rc_prc                             =xx
+    printVarSummary(xx)
+    con_fi_prc                         =rc_prc
+
+    P                                  =student_t(xx@tval, xx@nptxy-2)
+    confi_rc_prc                       =onedtond(P, (/dims(1),dims(2)/))
+
+    res                                =True
+    res@gsnAddCyclic                   =True
+    res@gsnDraw                        =False
+    res@gsnFrame                       =False
+    res@gsnLeftString                  =False
+    res@gsnRightString                 =False
+
+    resc                               =res
+
+    res@cnLevelSelectionMode           ="ExplicitLevels"
+    res@cnLevels                       =(/-20,20/)
+    res@cnFillColors                   =(/"gray","white","gray"/)
+    res@cnFillOn                       =True
+    res@cnLinesOn                      =False
+    res@cnInfoLabelOn                  =False
+    res@cnLineLabelsOn                 =False
+
+base=gsn_csm_contour_map(wks, confi_rc_prc, res)
+
+    ;;回归场等值线
+    resc@cnLevelSelectionMode          ="ExplicitLevels"
+    resc@cnLevels                      =1.*ispan(-10, 10, 1)
+    resc@cnFillOn                      =False
+    resc@cnInfoLabelOn                 =False
+    resc@gsnContourZeroLineThicknessF  =0.
+    resc@cnLineThicknessF              =2.
+    resc@cnLineLabelsOn                =False
+;plot=gsn_csm_contour(wks, rc_prc, resc)
+;plot=ColorNegDashZeroPosContour(plot,"black","black","black")
+
+;overlay(base, plot)
+
+   ;;添加额外的等值线
+   ;resc2                               =resc
+   ;resc2@cnLevels                      =(/-4,2/)
+   ;resc2@cnLineThicknessF              =7.
+   ;resc2@cnMonoLineDashPattern         =False
+   ;resc2@cnLineDashPatterns            =(/1,0/)
+   ;resc2@cnLineDashSegLenF             =0.25
+;plot2=gsn_csm_contour(wks, rc_prc, resc2)
+
+;overlay(base, plot2)
+
+draw(base)
+frame(wks)
+end
