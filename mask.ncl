@@ -14,17 +14,17 @@ begin
     res@cnFillOn=True
     res@cnLinesOn=False
 	res@cnLevelSelectionMode="Explicitlevels"
-	res@cnLevels=(/10,50,100,200,300,500,0600,800,1000,2000,3000,6000/)
+	;res@cnLevels=(/10,50,100,200,300,500,0600,800,1000,2000,3000,6000/)
     res@mpMaxLonF=140
     res@mpMinLonF=60
-    res@mpMinLatF=0
-    res@mpMaxLatF=60
+    res@mpMinLatF=10
+    res@mpMaxLatF=30
 
     base=gsn_csm_contour_map(wks, hgt, res)
     lnres=True
     ;lnres@gsnDraw=True
     ;lnres@gsnFrame=True
-    plot=gsn_add_shapefile_polygons(wks, base, "~/software/ncl/tibetan/tibetan.shp", lnres)
+   plot=gsn_add_shapefile_polylines(wks, base, "/mnt/f/scripts/ncl/shapefile/tibetan/tibetan.shp", lnres)
     maximize_output(wks, False)
 
 

@@ -1,4 +1,4 @@
-;----------------------------------------------------------------------
+;  ----------------------------------------------------------------------
 ; station_2.ncl
 ;----------------------------------------------------------------------
 ;
@@ -119,6 +119,7 @@ end
 begin
 ;---Set some needed arrays
   arr = (/0,0.001,0.002,0.003,0.004/)    ; bin settings (bin0 = < 0., 
+
                                          ; bin1 = 0.:4.999, etc.)
   narr = dimsizes(arr)
   labels = new(narr+1,string)   ; Labels for legend.
@@ -201,12 +202,14 @@ begin
   mpres@mpInlandWaterFillColor=0
   mpres@mpLandFillColor=0
 
-  mpres@mpMaskAreaSpecifiers   =(/"China : Guandong"/)
+  ;mpres@mpMaskAreaSpecifiers   =(/"China : Guandong"/)
+  mpres@mpMaskAreaSpecifiers    =(/"China"/)  
   mpres@mpOutlineOn =True
-  mpres@mpOutlineSpecifiers=(/"China : Guandong . Donghai Dao","China : Guandong . Donghai Dao",\
-        "China : Guandong . Gaolan Dao","China : Guandong . Hailing Dao","Guandong . Nansan Dao",\
-        "China : Guandong . Naozhou Dao","China : Guandong . Shangchuan Dao",\
-        "China : Guandong . Xiachuan Dao","China : Guandong . Xinliao Dao","China : Guandong"/)
+  ;mpres@mpOutlineSpecifiers=(/"China : Guandong . Donghai Dao","China : Guandong . Donghai Dao",\
+  ;      "China : Guandong . Gaolan Dao","China : Guandong . Hailing Dao","Guandong . Nansan Dao",\
+  ;      "China : Guandong . Naozhou Dao","China : Guandong . Shangchuan Dao",\
+  ;      "China : Guandong . Xiachuan Dao","China : Guandong . Xinliao Dao","China : Guandong"/)
+  mpres@mpOutlineSpecifiers=(/"Guandong","China:Provinces"/)
   mpres@mpOutlineBoundarySets="NoBoundaries"
 ;================================================================================
 ;================================================================================
