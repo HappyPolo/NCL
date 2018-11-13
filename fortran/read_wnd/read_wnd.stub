@@ -1,0 +1,7 @@
+C NCLFORTRANSTART
+      subroutine read_wnd(id,sta,lon,lat,h,wnd_input,yyyy,mm,dd)
+      real :: lon(937153),lat(937153),h(937153),wnd(937153),wnd_input(349,4748)
+      integer yy(937153),mm(937153),dd(937153),yyyy(937153)
+      integer i,num,j,sta,ns,nt,n
+      character(20) id(937153) ,date,stat(349)
+C NCLEND

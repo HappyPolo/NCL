@@ -1,0 +1,6 @@
+C NCLFORTSTART
+      subroutine cquad(a,b,c,nq,x,quad)
+      real a,b,c
+      integer nq
+      dimension x(nq),quad(nq)
+C NCLEND

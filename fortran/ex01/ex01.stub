@@ -1,0 +1,10 @@
+C NCLFORTSTART
+      subroutine cquad (a, b, c, nq, x, quad)
+      real a, b, c
+      real x(nq), quad(nq)
+C NCLEND
+C NCLFORTSTART
+      function arcln (numpnt, pointx, pointy)
+      integer numpnt
+      real pointx(numpnt),pointy(numpnt)
+C NCLEND
