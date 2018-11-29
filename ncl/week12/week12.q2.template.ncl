@@ -15,6 +15,7 @@ begin
     aug = ispan(197108, 200008, 100)
     time_exc = new(90, float)
     time_exc =ndtooned(transpose((/jun,jul,aug/)))
+    print(time_exc)
     time@_FillValue = -999
     exc = get1Dindex_Exclude(time, (time_exc))
 

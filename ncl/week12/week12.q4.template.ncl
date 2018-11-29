@@ -23,36 +23,59 @@ begin
 	
 	miss  = new(nData,logical)
 
-	do i = 0, nData-1
-		if (uA(i).eq.-999. .or. vA(i).eq.-999.) then
-			miss(i) = True
-		else
-			miss(i) = False
-		end if
-	end do
+	; do i = 0, nData-1
+	; 	if (uA(i).eq.-999. .or. vA(i).eq.-999.) then
+	; 		miss(i) = True
+	; 	else
+	; 		miss(i) = False
+	; 	end if
+	; end do
+
+	miss = where(uA.eq.-999. .or. vA.eq.-999., True, False)
 	
 	; Step 3: Extract the data points without missing values
 	
-	notMiss = ind(.not. miss)
-	nExist  = dimsizes(notMiss)		
+	; notMiss = ind(.not. miss)
+	; nExist  = dimsizes(notMiss)		
 	
 	
 	; Step 4: Calculate the averaged momentum flux over the points without missing values
 	; if there are at least 10 non-missing data
 	
-	if (nExist.ge.10) then
+	; if (nExist.ge.10) then
 		
-		momentumFlux = new(nExist,typeof(uA))
+	; 	momentumFlux = new(nExist,typeof(uA))
 		
-		do n = 0, nExist-1
-			momentumFlux(n) = uA(notMiss(n))*vA(notMiss(n))
-		end do
+	; 	do n = 0, nExist-1
+	; 		momentumFlux(n) = uA(notMiss(n))*vA(notMiss(n))
+	; 	end do
 		
-		momentumFluxAvg = avg(momentumFlux)
-	else
-		momentumFluxAvg	= -999.
-	end if	
+	; 	momentumFluxAvg = avg(momentumFlux)
+	; else
+	; 	momentumFluxAvg	= -999.
+	; end if	
 
-	print(momentumFluxAvg)
+	uA@_FillValue = -999.
+	vA@_FillValue = -999.
+	uva = uA*vA
+	notMiss = ind(.not.miss)
+	nExist  = dimsizes(notMiss)
+	momentumFlux = new(nExist,typeof(uA))
+	momentumFlux = uva(notMiss)
+	if (nExist.ge.10) then
+		momentumFluxAvg = avg(momentumFlux)
+	else 
+		momentumFluxAvg = -999.
+	end if 
+
+
+print(momentumFluxAvg)
+
+end 
+
+
+
+
+; 	print(momentumFluxAvg)
 	
-end
+; end
