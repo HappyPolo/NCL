@@ -17,3 +17,5 @@ res@txPerimDashPattern =16
 res@txPerimDashLengthF =0.15
 res@txPerimOn          =True
 res@txPerimThicknessF  =1.
+~S~ ;上标
+~B~ ;下标

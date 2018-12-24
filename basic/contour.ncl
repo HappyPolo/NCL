@@ -72,6 +72,6 @@ res@cnHighLabelFontHeightF       =0.024 ;字体高度
 res@cnLowLabelsOn                =True 
 res@cnLowLabelBackgroundColor    =-1
 res@cnLowLabelFontHeightF        =0.024
-
+    base(i)=ColorNegDashZeroPosContour(base(i),"blue","black","red");;;设置等值线负值/ 0 /正值颜色
 
 res@gsnAddCyclic                 =True ;在数据为局部区域时需要

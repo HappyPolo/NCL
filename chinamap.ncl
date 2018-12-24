@@ -8,11 +8,11 @@
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl" 
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl" 
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
-load "$NCARG_ROOT/lib/ncarg/nclscripts/cnmap/cnmap.ncl"
+load "/mnt/e/scripts/ncl/NCL-Chinamap/cnmap/cnmap.ncl"
 ;高分辨率地图
 begin
 
-   f=addfile("/mnt/f/data/cfv2_output/pres.mon.ltm.nc","r")
+   f=addfile("/mnt/e/data/cfv2_output/pres.mon.ltm.nc","r")
    pres= f->pres(0,:,:) 
 
 ;>=========================================================<

@@ -19,7 +19,7 @@ resv@vcFillArrowWidthF         =0.1
 ;;;;;;;;;;;;;;;;;;;;;linearrow
 resv@vcMonoLineArrowColor      =True
 resv@vcLineArrowColor          ="black"
-resv@vcLineArrowThicknessF     =4.
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;参考箭头
 resv@vcRefAnnoOn               =True

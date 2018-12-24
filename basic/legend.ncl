@@ -1,6 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;图例
 res@pmLegendDisplayMode    ="Always"
-
+    res@pmTickMarkDisplayMode="Always"
 ;;;;;;;;;;;;;;;;;;;;;;;;;方向
 res@lgOrientation          ="Horizontal"
 

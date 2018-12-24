@@ -20,3 +20,6 @@ resst@stMonoLineColor      =False
 
 resst@stMinDistanceF       =0.03
 resst@stMinLineSpacingF    =0.007
+stMinArrowSpacingF
+stArrowLengthF
+stArrowStride
