@@ -26,3 +26,4 @@ res@pmLabelBarParallelPosF   =0.5 ;水平调整色标位置
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;色标大小
 res@pmLabelBarWidthF         =0.15 ;宽度
 res@pmLabelBarHeightF        =0.6 ;高度
+res@lbBoxEndCapStyle = “TriangleBothEnds”

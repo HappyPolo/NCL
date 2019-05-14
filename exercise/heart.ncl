@@ -21,7 +21,7 @@ begin
     homeAttrs@tmYRBorderOn      = False
     
     girlAttrs                   = True
-    girlAttrs@gsFillColor       = "red"
+    girlAttrs@gsFillColor       = "green"
     girlAttrs@gsEdgesOn         = False
     girlAttrs@gsFillOpacityF    = 0.8
     boyAttrs                    = girlAttrs
